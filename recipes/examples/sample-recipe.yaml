@@ -1,0 +1,9 @@
+id: sample-recipe
+version: 1.0.0
+component:
+  id: demo-component
+  repository: https://github.com/example/demo
+  entrypoint: dist/handler.js
+runtime:
+  timeoutMs: 3000
+  memoryMb: 256

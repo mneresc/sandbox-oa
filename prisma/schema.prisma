@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Component {
+  id          String   @id @default(cuid())
+  name        String
+  repository  String
+  createdAt   DateTime @default(now())
+}
+
+model Repository {
+  id        String   @id @default(cuid())
+  name      String
+  url       String
+  createdAt DateTime @default(now())
+}
+
+model EnvDiscovery {
+  id        String   @id @default(cuid())
+  component String
+  varsJson  String
+  createdAt DateTime @default(now())
+}
+
+model EnvMapping {
+  id          String   @id @default(cuid())
+  discoveryId String
+  mappingJson String
+  createdAt   DateTime @default(now())
+}
+
+model RecipeIndex {
+  id        String   @id
+  title     String
+  version   String
+  createdAt DateTime @default(now())
+}
+
+model ResourceState {
+  id        String   @id @default(cuid())
+  recipeId  String
+  stateJson String
+  createdAt DateTime @default(now())
+}
+
+model SandboxSession {
+  id        String   @id
+  component String
+  status    String
+  createdAt DateTime @default(now())
+}
+
+model Execution {
+  id          String   @id
+  componentId String
+  status      String
+  durationMs  Int?
+  memoryMb    Int?
+  artifactRef String?
+  createdAt   DateTime @default(now())
+}
